@@ -23,10 +23,15 @@ void ABall::Tick(float DeltaTime)
 	if (HitResult.bBlockingHit)
 	{
 		float DotProduct = FVector::DotProduct(Velocity, HitResult.Normal);
-		FVector newVelocity;
-		newVelocity.X = Velocity.X - 2 * DotProduct * HitResult.Normal.X;
-		newVelocity.Y = Velocity.Y - 2 * DotProduct * HitResult.Normal.Y;
-		Velocity = newVelocity;
+		FVector NewVelocity;
+		NewVelocity.X = Velocity.X - 2 * DotProduct * HitResult.Normal.X;
+		NewVelocity.Y = Velocity.Y - 2 * DotProduct * HitResult.Normal.Y;
+
+		// Move along the new velocity scaled by how much "time" we went into the blocking hit,
+		// this time without sweeping.
+		AddActorWorldOffset(NewVelocity * DeltaTime * (1-HitResult.Time), false);
+
+		Velocity = NewVelocity;
 	}
 }
 
