@@ -33,5 +33,15 @@ void ABall::Tick(float DeltaTime)
 
 		Velocity = NewVelocity;
 	}
+
+	// Damage the thing that is hit if it can take damage.
+	if (AActor* Target = HitResult.Actor.Get())
+	{
+		if (Target->CanBeDamaged())
+		{
+			Target->TakeDamage(1, FDamageEvent(), GetWorld()->GetFirstPlayerController(), this);
+		}
+	}
+	
 }
 
