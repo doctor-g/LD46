@@ -23,7 +23,15 @@ protected:
 	UStaticMeshComponent* MeshComponent;
 
 public:
-	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	UPROPERTY(EditAnywhere)
 	FVector Velocity;
+
+	// The amount to increase velocity on each bounce (e.g. .05 would increase by 5% each bounce)
+	UPROPERTY(EditAnywhere)
+	float IncreaseRate;
+
+	// The maximum allowed speed
+	UPROPERTY(EditAnywhere)
+	float MaxSpeed;
 
 };

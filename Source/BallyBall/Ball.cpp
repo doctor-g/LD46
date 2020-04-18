@@ -5,6 +5,8 @@
 
 // Sets default values
 ABall::ABall()
+	: IncreaseRate(.01)
+	, MaxSpeed(1500)
 {
 	PrimaryActorTick.bCanEverTick = true;
 	MeshComponent = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("Mesh"));
@@ -31,7 +33,12 @@ void ABall::Tick(float DeltaTime)
 		// this time without sweeping.
 		AddActorWorldOffset(NewVelocity * DeltaTime * (1-HitResult.Time), false);
 
-		Velocity = NewVelocity;
+		// Update the velocity, accounting for the bounce increase
+		Velocity = NewVelocity * (1 + IncreaseRate);
+		if (Velocity.Size() >= MaxSpeed)
+		{
+			Velocity = Velocity * MaxSpeed / Velocity.Size();
+		}
 	}
 
 	// Damage the thing that is hit if it can take damage.
