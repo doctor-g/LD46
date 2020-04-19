@@ -13,4 +13,9 @@ Saved
 *.suo
 *.xcodeproj
 *.xcworkspace
+
+# Blender backup file
 *.blend1
+
+# LMMS backup file
+*mmpz.bak
