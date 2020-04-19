@@ -13,6 +13,7 @@ Created for [Ludum Dare 46](http://ldjam.com/events/ludum-dare/46) with the them
 - [Audacity](https://www.audacityteam.org/)
 - [Blender](https://www.blender.org/)
 - [Visual Studio 2017 Community](https://visualstudio.microsoft.com/vs/community/)
+- [Gimp](https://www.gimp.org/)
 
 ## Third-Party Assets
 
