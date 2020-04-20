@@ -10,7 +10,7 @@ ABall::ABall()
 {
 	PrimaryActorTick.bCanEverTick = true;
 	MeshComponent = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("Mesh"));
-	MeshComponent->SetupAttachment(RootComponent);
+	RootComponent = MeshComponent;
 }
 
 // Called every frame
