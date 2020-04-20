@@ -34,7 +34,16 @@ void ABall::Tick(float DeltaTime)
 		AddActorWorldOffset(NewVelocity * DeltaTime * (1-HitResult.Time), false);
 
 		// Update the velocity, accounting for the bounce increase
-		Velocity = NewVelocity * (1 + IncreaseRate);
+		NewVelocity *= (1 + IncreaseRate);
+		// Trap the bug that makes the ball sometimes slow down
+		if (Velocity.SizeSquared() > NewVelocity.SizeSquared())
+		{
+			UE_LOG(LogTemp, Display, TEXT("Encountered the slowdown bug"));
+			NewVelocity *= Velocity.Size() / NewVelocity.Size();
+		}
+		Velocity = NewVelocity;
+
+		// Cap the velocity below maxspeed
 		if (Velocity.Size() >= MaxSpeed)
 		{
 			Velocity = Velocity * MaxSpeed / Velocity.Size();
